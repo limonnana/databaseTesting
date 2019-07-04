@@ -1,6 +1,7 @@
 package com.limonnana.monthFactory;
 
 import com.limonnana.domain.*;
+import com.limonnana.repository.ListWrapperRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -18,6 +19,9 @@ public class MonthUtils {
 
     @Autowired
     MonthService monthService;
+
+    @Autowired
+    ListWrapperRepository listWrapperRepository;
 
     /*
     EntityOnCalendar saveEntity(int from, int untill, int year, int eFrom, int eUntill, Month name, long userId){
@@ -69,12 +73,18 @@ public class MonthUtils {
         sb.append(day);
         String idListWrapperS = sb.toString();
         Integer idListWrapper = Integer.valueOf(idListWrapperS);
-        // get first list from database
-        ListWrapper listWrapper = new ListWrapper();
-        listWrapper.setId(idListWrapper.intValue());
+        List<UnitOfCalendar> list = null;
+        ListWrapper listWrapper = listWrapperRepository.findById(idListWrapper).get();
+        if(listWrapper == null) {
+            listWrapper = new ListWrapper();
+            listWrapper.setId(idListWrapper.intValue());
+            list = new ArrayList<>();
+        }else{
+            list = listWrapper.getList();
+        }
         UnitOfCalendar uc = new UnitOfCalendar();
         uc.setUserId(monthDTO.getUserLogin());
-        List<UnitOfCalendar> list = new ArrayList<>();
+
         list.add(uc);
         listWrapper.setList(list);
         monthService.saveEntity(listWrapper);

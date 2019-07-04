@@ -70,7 +70,7 @@ public class MonthController {
     ResponseEntity<String> saveEntity(@PathVariable("month") String month, @PathVariable("year") int year, @PathVariable("day") int day, @PathVariable("from") int from, @PathVariable("untill") int untill){
         System.out.println("addEntity");
         MonthDTO monthDTO = new MonthDTO();
-        monthDTO.setUserLogin("user6");
+        monthDTO.setUserLogin("user8");
         monthDTO.setName(month);
         monthDTO.setYear(year);
         monthDTO.setDay(day);

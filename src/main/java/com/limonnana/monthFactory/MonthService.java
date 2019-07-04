@@ -20,9 +20,9 @@ public class MonthService {
 
     public void saveEntity(ListWrapper listWrapper){
 
-        for(UnitOfCalendar u : listWrapper.getList()){
-            unitOfCalendarRepository.save(u);
-        }
+        //for(UnitOfCalendar u : listWrapper.getList()){
+       //     unitOfCalendarRepository.save(u);
+      //  }
         listWrapperRepository.save(listWrapper);
     }
 }

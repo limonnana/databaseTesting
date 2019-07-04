@@ -13,7 +13,7 @@ public class ListWrapper {
     @Id
     private int id;
 
-    @OneToMany
+    @OneToMany(cascade=CascadeType.ALL, fetch = FetchType.EAGER)
     private List<UnitOfCalendar> list;
 
     public List<UnitOfCalendar> getList() {
